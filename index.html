@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>মিনি ইনভেস্ট — Investment Website</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">মিনি ইনভেস্ট</h1>
+      <nav>
+        <a href="#calculator">ক্যালকুলেটর</a>
+        <a href="#portfolio">পোর্টফোলিও</a>
+        <a href="#about">বিস্তারিত</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>তুমি কীভাবে ভবিষ্যতের জন্য সঞ্চয় বাড়াতে পারবে?</h2>
+        <p>সহজ ক্যালকুলেটর দিয়ে হিসাব করো—বা তোমার পোর্টফোলিও যুক্ত করে ভবিষ্যত মূল্য দেখো।</p>
+        <a href="#calculator" class="btn">ক্যালকুলেটর চালাও</a>
+      </div>
+    </section>
+
+    <section id="calculator" class="container section">
+      <h3>ইনভেস্টমেন্ট ক্যালকুলেটর</h3>
+      <div class="card calc-grid">
+        <div>
+          <label>প্রাথমিক বিনিয়োগ (৳)</label>
+          <input id="principal" type="number" min="0" value="10000" />
+        </div>
+        <div>
+          <label>বার্ষিক রিটার্ন (%)</label>
+          <input id="rate" type="number" min="0" step="0.01" value="8" />
+        </div>
+        <div>
+          <label>সময়সীমা (বছর)</label>
+          <input id="years" type="number" min="0" value="10" />
+        </div>
+        <div>
+          <label>কম্পাউন্ডিং (বার/বছর)</label>
+          <select id="compounds">
+            <option value="1">বার্ষিক (1)</option>
+            <option value="4">ত্রৈমাসিক (4)</option>
+            <option value="12" selected>মাসিক (12)</option>
+            <option value="365">দৈনিক (365)</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <button id="calcBtn" class="btn">হিসাব করো</button>
+        </div>
+
+        <div class="result full">
+          <h4>ফলাফল</h4>
+          <p>ভবিষ্যত মূল্য (Future Value): <strong id="fv">—</strong> ৳</p>
+          <p>মোট লাভ: <strong id="profit">—</strong> ৳</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="container section">
+      <h3>পোর্টফোলিও</h3>
+
+      <div class="card">
+        <form id="addForm" class="form-inline">
+          <input id="p-name" placeholder="নাম (যেমন: সেভিংস/Fund A)" required />
+          <input id="p-amount" type="number" min="0" placeholder="টাকা" required />
+          <input id="p-rate" type="number" min="0" step="0.01" placeholder="বার্ষিক % রিটার্ন" required />
+          <input id="p-years" type="number" min="0" placeholder="বছর" required />
+          <button type="submit" class="btn small">যোগ করো</button>
+        </form>
+
+        <table id="portfolioTable" class="portfolio-table">
+          <thead>
+            <tr>
+              <th>নাম</th>
+              <th>টাকা (৳)</th>
+              <th>বার্ষিক %</th>
+              <th>বছর</th>
+              <th>ভবিষ্যত মূল্য</th>
+              <th>কর্ম</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">মোট</td>
+              <td id="portfolioTotal">৳ 0</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section id="about" class="container section">
+      <h3>বিস্তারিত</h3>
+      <p>এই সাইটটি একটি স্ট্যাটিক ডেমো—ক্যালকুলেটর ও পোর্টফোলিও ব্যবস্থাপনা ক্লায়েন্ট-সাইডে কাজ করে (localStorage)। প্রকৃত বিনিয়োগ সিদ্ধান্তের আগে পেশাদার পরামর্শ নেবেন।</p>
+      <p>চাইলে আমি এই প্রজেক্টকে GitHub-এ আপলোড করে, বা সার্ভারে ডিপ্লয় করার নির্দেশনা দিতে পারি।</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 মিনি ইনভেস্ট — ডেমো প্রজেক্ট</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
