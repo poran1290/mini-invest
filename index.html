@@ -36,7 +36,7 @@
       <h3>ইনভেস্টমেন্ট ক্যালকুলেটর</h3>
       <div class="card calc-grid">
         <div>
-          <label>প্রাথমিক বিনিয়���গ (৳)</label>
+          <label>প্রাথমিক বিনিয়োগ (৳)</label>
           <input id="principal" type="number" min="0" value="10000" />
         </div>
         <div>
@@ -69,56 +69,68 @@
       </div>
     </section>
 
+    <!-- Portfolio: requires auth to view details -->
     <section id="portfolio" class="container section">
       <h3>পোর্টফোলিও</h3>
 
       <div class="card">
-        <form id="addForm" class="form-inline">
-          <input id="p-name" placeholder="নাম (যেমন: সেভিংস/Fund A)" required />
-          <input id="p-amount" type="number" min="0" placeholder="টাকা" required />
-          <input id="p-rate" type="number" min="0" step="0.01" placeholder="বার্ষিক % রিটার্ন" required />
-          <input id="p-years" type="number" min="0" placeholder="বছর" required />
-          <button type="submit" class="btn small">যোগ করো</button>
-        </form>
-
-        <div class="portfolio-actions">
-          <button id="exportCsv" class="btn small outline">Export CSV</button>
-          <label class="btn small file-label">Import CSV <input id="importCsv" type="file" accept="text/csv" hidden></label>
-          <button id="clearPortfolio" class="btn small danger">Clear All</button>
+        <div id="portfolioLock" class="lock hidden">
+          <p><strong>পোর্টফোলিও দেখতে লগইন করুন</strong></p>
+          <p>আপনি যদি একাউন্ট না থেকে থাকেন, রেজিস্টার করে তারপর ভেতরে ঢুকুন।</p>
+          <button id="openAuthFromLock" class="btn small">লগইন / রেজিস্টার</button>
         </div>
 
-        <table id="portfolioTable" class="portfolio-table">
-          <thead>
-            <tr>
-              <th>নাম</th>
-              <th>টাকা (৳)</th>
-              <th>বার্ষিক %</th>
-              <th>বছর</th>
-              <th>ভবিষ্যত মূল্য</th>
-              <th>কর্ম</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-          <tfoot>
-            <tr>
-              <td colspan="4">মোট</td>
-              <td id="portfolioTotal">৳ 0</td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
+        <div id="portfolioContent">
+          <form id="addForm" class="form-inline">
+            <input id="p-name" placeholder="নাম (যেমন: সেভিংস/Fund A)" required />
+            <input id="p-amount" type="number" min="0" placeholder="টাকা" required />
+            <input id="p-rate" type="number" min="0" step="0.01" placeholder="বার্ষিক % রিটার্ন" required />
+            <input id="p-years" type="number" min="0" placeholder="বছর" required />
+            <button type="submit" class="btn small">যোগ করো</button>
+          </form>
 
-        <div class="chart-card">
-          <h4>পোর্টফোলিও চার্ট (Future Value)</h4>
-          <canvas id="portfolioChart" height="120"></canvas>
+          <div class="portfolio-actions">
+            <button id="exportCsv" class="btn small outline">Export CSV</button>
+            <label class="btn small file-label">Import CSV <input id="importCsv" type="file" accept="text/csv" hidden></label>
+            <button id="clearPortfolio" class="btn small danger">Clear All</button>
+          </div>
+
+          <table id="portfolioTable" class="portfolio-table">
+            <thead>
+              <tr>
+                <th>নাম</th>
+                <th>টাকা (৳)</th>
+                <th>বার্ষিক %</th>
+                <th>বছর</th>
+                <th>ভবিষ্যত মূল্য</th>
+                <th>কর্ম</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">মোট</td>
+                <td id="portfolioTotal">৳ 0</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div class="chart-card">
+            <h4>পোর্টফোলিও চার্ট (Future Value)</h4>
+            <canvas id="portfolioChart" height="120"></canvas>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="about" class="container section">
       <h3>বিস্তারিত</h3>
-      <p>এই সাইটটি একটি স্ট্যাটিক ডেমো—ক্যালকুলেটর ও পোর্টফোলিও ব্যবস্থাপনা ক্লায়েন্ট-সাইডে কাজ করে (localStorage)। প্রকৃত বিনিয়োগ সিদ্ধান্তের আগে পেশাদার পরামর্শ নেবেন।</p>
-      <p>এই সংস্করণে চার্ট (Chart.js), CSV Export/Import এবং সহজ লগইন/রেজিস্ট্রেশন (localStorage) যোগ করা হয়েছে।</p>
+      <p>এই সাইটটি একটি স্ট্যাটিক ডেমো—ক্যালকুলেটর ও পোর্টফোলিও ব্যবস্থাপনা ক্লায়েন্ট-সাইডে কাজ করে (localStorage)।</p>
+      <div id="aboutDetails" class="requires-auth hidden">
+        <p>এই অংশটি শুধুমাত্র রেজিস্টারকৃত ইউজাররা দেখতে পারবেন। এখানে আপনি আপনার ব্যক্তিগত পোর্টফোলিও বিশ্লেষণ, কাস্টম টিপস এবং অন্যান্য সংবেদনশীল বিষয় দেখতে পারবেন।</p>
+      </div>
+      <p id="aboutHint" class="about-hint">বিস্তারিত দেখতে লগইন করুন।</p>
     </section>
   </main>
 

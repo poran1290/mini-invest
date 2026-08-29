@@ -42,7 +42,8 @@ function setCurrentUserEmail(email){
 // Portfolio keys: per-user
 function portfolioKeyFor(email){
   if(!email) return 'mini_invest_portfolio_guest';
-  return `mini_invest_portfolio_${email}`;
+  // sanitize email for key (replace @ and .)
+  return `mini_invest_portfolio_${email.replace(/[@.]/g,'_')}`;
 }
 
 function loadPortfolio(){
@@ -75,12 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Portfolio elements
+  const portfolioSection = document.getElementById('portfolio');
+  const portfolioLock = document.getElementById('portfolioLock');
+  const portfolioContent = document.getElementById('portfolioContent');
   const tableBody = document.querySelector('#portfolioTable tbody');
   const portfolioTotalEl = document.getElementById('portfolioTotal');
   const addForm = document.getElementById('addForm');
   const exportBtn = document.getElementById('exportCsv');
   const importInput = document.getElementById('importCsv');
   const clearBtn = document.getElementById('clearPortfolio');
+  const openAuthFromLock = document.getElementById('openAuthFromLock');
 
   function renderPortfolio(){
     const items = loadPortfolio();
@@ -239,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const logoutBtn = document.createElement('button');
       logoutBtn.className = 'btn small outline';
       logoutBtn.textContent = 'লগআউট';
-      logoutBtn.addEventListener('click', ()=>{ setCurrentUserEmail(null); updateAuthUI(); renderPortfolio(); });
+      logoutBtn.addEventListener('click', ()=>{ setCurrentUserEmail(null); updateAuthUI(); updateProtectedContent(); });
       authArea.appendChild(logoutBtn);
     } else {
       const loginLink = document.createElement('button');
@@ -269,6 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   modalClose.addEventListener('click', closeAuthModal);
   showLogin.addEventListener('click', ()=>openAuthModal('login'));
   showRegister.addEventListener('click', ()=>openAuthModal('register'));
+  openAuthFromLock.addEventListener('click', ()=>openAuthModal('login'));
 
   // Register
   registerBtn.addEventListener('click', async ()=>{
@@ -285,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     saveUsers(users);
     setCurrentUserEmail(email);
     updateAuthUI();
+    updateProtectedContent();
     closeAuthModal();
     renderPortfolio();
     alert('রেজিস্ট্রেশন সফল — স্বাগতম!');
@@ -302,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(hash !== user.passwordHash){ alert('পাসওয়ার্ড ভুল'); return; }
     setCurrentUserEmail(email);
     updateAuthUI();
+    updateProtectedContent();
     closeAuthModal();
     renderPortfolio();
     alert('লগইন সফল');
@@ -309,6 +317,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close modal when clicking outside content
   authModal.addEventListener('click', (e)=>{ if(e.target===authModal) closeAuthModal(); });
+
+  // Protected content toggling
+  const aboutDetails = document.getElementById('aboutDetails');
+  const aboutHint = document.getElementById('aboutHint');
+
+  function updateProtectedContent(){
+    const email = getCurrentUserEmail();
+    if(email){
+      // show portfolio content and about details
+      portfolioLock.classList.add('hidden');
+      portfolioContent.classList.remove('hidden');
+      aboutDetails.classList.remove('hidden');
+      aboutHint.classList.add('hidden');
+    } else {
+      // hide portfolio content and show lock
+      portfolioLock.classList.remove('hidden');
+      portfolioContent.classList.add('hidden');
+      aboutDetails.classList.add('hidden');
+      aboutHint.classList.remove('hidden');
+    }
+  }
 
   // Utils
   function escapeHtml(s){
@@ -334,5 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // initial render
   updateAuthUI();
+  updateProtectedContent();
   renderPortfolio();
 });
