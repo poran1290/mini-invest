@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+</head>
+
+<body>
+
+<div style="max-width:900px;margin:auto;padding:20px">
+
+<header>
+
+<h2 id="welcome">
+    Dashboard
+</h2>
+
+<button onclick="logout()">
+    Logout
+</button>
+
+</header>
+
+<hr>
+
+<h3>Wallet</h3>
+
+<div class="auth-card">
+
+<h1>
+    ৳ <span id="balance">0.00</span>
+</h1>
+
+<p>
+    Available balance
+</p>
+
+</div>
+
+<h3>My Packages</h3>
+
+<div id="packages">
+    Loading...
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script>
+
+async function loadDashboard() {
+
+    try {
+
+        const data =
+            await apiRequest("/users/me");
+
+        document.getElementById(
+            "welcome"
+        ).textContent =
+            `Hello, ${data.user.name}`;
+
+        document.getElementById(
+            "balance"
+        ).textContent =
+            Number(data.wallet.balance)
+            .toFixed(2);
+
+        const container =
+            document.getElementById("packages");
+
+        if (!data.packages.length) {
+
+            container.innerHTML =
+                "<p>No packages yet.</p>";
+
+            return;
+        }
+
+        container.innerHTML =
+            data.packages.map(pkg => `
+                <div class="auth-card"
+                     style="margin-top:15px">
+
+                    <h3>
+                        ${pkg.name}
+                    </h3>
+
+                    <p>
+                        Amount: ৳${pkg.amount}
+                    </p>
+
+                    <p>
+                        Start:
+                        ${new Date(pkg.start_date)
+                          .toLocaleDateString()}
+                    </p>
+
+                    <p>
+                        End:
+                        ${new Date(pkg.end_date)
+                          .toLocaleDateString()}
+                    </p>
+
+                    <strong>
+                        ${pkg.status}
+                    </strong>
+
+                </div>
+            `).join("");
+
+    } catch(error) {
+
+        if (
+            error.message.includes("token") ||
+            error.message.includes("Authentication")
+        ) {
+            logout();
+        }
+
+        console.error(error);
+    }
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

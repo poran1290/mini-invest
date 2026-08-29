@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+
+<title>Create Account</title>
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<div class="auth-card">
+
+<h1>Create Account</h1>
+
+<form id="registerForm">
+
+<input
+    id="name"
+    placeholder="Full name"
+    required
+>
+
+<input
+    id="email"
+    type="email"
+    placeholder="Email"
+    required
+>
+
+<input
+    id="password"
+    type="password"
+    placeholder="Password"
+    minlength="6"
+    required
+>
+
+<input
+    id="referralCode"
+    placeholder="Referral code (optional)"
+>
+<button type="submit">
+    Register
+</button>
+
+</form>
+
+<p id="message"></p>
+
+<a href="login.html">
+    Already have an account?
+</a>
+
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script>
+
+document
+.getElementById("registerForm")
+.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const message =
+        document.getElementById("message");
+
+    try {
+
+        const data =
+            await apiRequest(
+                "/auth/register",
+                {
+                    method: "POST",
+
+                    body: JSON.stringify({
+
+                        name:
+                            document.getElementById("name").value,
+
+                        email:
+                            document.getElementById("email").value,
+
+                        password:
+                            document.getElementById("password").value,
+
+                        referralCode:
+                            document.getElementById(
+                                "referralCode"
+                            ).value || null
+                    })
+                }
+            );
+
+        message.textContent =
+            "Registration successful. Please login.";
+
+        setTimeout(() => {
+            location.href = "login.html";
+        }, 1000);
+
+    } catch(error) {
+
+        message.textContent =
+            error.message;
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Transactions</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div style="max-width:900px;margin:auto;padding:20px">
+  <h2>Transactions</h2>
+  <div id="tx">Loading...</div>
+</div>
+<script src="js/api.js"></script>
+<script>
+async function load(){
+  try{
+    const data = await apiRequest('/wallet');
+    const rows = data.transactions.map(t=>`<div class="auth-card" style="margin-top:8px"><strong>${t.type}</strong><p>৳ ${t.amount}</p><small>${new Date(t.created_at).toLocaleString()}</small></div>`).join('');
+    document.getElementById('tx').innerHTML = rows || '<p>No transactions</p>';
+  }catch(e){ console.error(e); document.getElementById('tx').innerText='Error'; }
+}
+load();
+</script>
+</body>
+</html>

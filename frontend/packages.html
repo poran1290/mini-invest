@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Packages</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div style="max-width:900px;margin:auto;padding:20px">
+    <h2>Packages</h2>
+    <div id="packages">Loading...</div>
+  </div>
+
+<script src="js/api.js"></script>
+<script>
+async function load() {
+  try {
+    const data = await apiRequest('/packages');
+    const el = document.getElementById('packages');
+    if(!data.packages.length) return el.innerHTML = '<p>No packages found</p>';
+    el.innerHTML = data.packages.map(p=>`<div class="auth-card" style="margin-top:10px"><h3>${p.name}</h3><p>৳ ${p.price}</p><p>${p.description||''}</p></div>`).join('');
+  }catch(e){ console.error(e); document.getElementById('packages').innerText='Error'; }
+}
+load();
+</script>
+</body>
+</html>

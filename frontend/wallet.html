@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wallet</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div style="max-width:900px;margin:auto;padding:20px">
+  <h2>Wallet</h2>
+  <div id="wallet">Loading...</div>
+</div>
+<script src="js/api.js"></script>
+<script>
+async function load(){
+  try{
+    const data = await apiRequest('/wallet');
+    document.getElementById('wallet').innerHTML = `<div class="auth-card"><h1>৳ ${Number(data.balance).toFixed(2)}</h1><p>Transactions: ${data.transactions.length}</p></div>`;
+  }catch(e){ console.error(e); document.getElementById('wallet').innerText='Error'; }
+}
+load();
+</script>
+</body>
+</html>

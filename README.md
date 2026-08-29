@@ -1,22 +1,9 @@
-# মিনি ইনভেস্ট (mini-invest)
+# Investment Platform
 
-একটি সহজ স্ট্যাটিক ডেমো ওয়েবসাইট — ইনভেস্টমেন্ট ক্যালকুলেটর এবং ক্লায়েন্ট-সাইড পোর্টফোলিও ম্যানেজার (localStorage)।
+This repository contains a scaffold for an investment business-participation / commission platform.
 
-নতুন: এই সংস্করণে সহজ লগইন/রেজিস্ট্রেশন সিস্টেম (localStorage), চার্ট (Chart.js), CSV Export/Import যোগ করা হয়েছে।
+Structure: frontend (static UI) and backend (Node.js + Express + PostgreSQL).
 
-সতর্কতা: ক্লায়েন্ট-সাইড রেজিস্ট্রেশন/লগইন কেবল ডেমো উদ্দেশ্যে। বাস্তবে নিরাপদ সার্ভার-সাইড অথেনটিকেশন ব্যবহার করুন (bcrypt, JWT, HTTPS)।
+IMPORTANT: This is an MVP scaffold. Do NOT enable real-money deposits/withdrawals before completing legal/compliance checks, KYC, and payment-provider integration.
 
-ফাইলসমূহ:
-- `index.html` — মূল পেজ
-- `styles.css` — স্টাইল
-- `script.js` — জাভাস্ক্রিপ্ট লজিক (ক্যালকুলেটর, পোর্টফোলিও, চার্ট, CSV, auth)
-
-চালানোর উপায়:
-1. এই রিপোজিটরি ক্লোন করো বা ডাউনলোড করো
-2. ফাইলগুলো একই ফোল্ডারে রেখে `index.html` ব্রাউজারে খুলুন
-
-ইউজারনোটেস:
-- ইউজার একাউন্ট ও পাসওয়ার্ড লোকালি ব্রাউজারের localStorage-এ রাখা হবে (password hashed with SHA-256 on client-side).
-- প্রতিটি ইউজারের জন্য আলাদা পোর্টফোলিও key তৈরি করা হয়: `mini_invest_portfolio_{email}`।
-
-ভবিষ্যতে অ্যাড করতে চান: সার্ভার-সাইড অথেনটিকেশন (Express/Firebase), ইমেল ভেরিফিকেশন, password reset, OAuth social logins।
+See README in each folder for further instructions.
