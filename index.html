@@ -17,6 +17,9 @@
         <a href="#portfolio">পোর্টফোলিও</a>
         <a href="#about">বিস্তারিত</a>
       </nav>
+      <div class="auth-area" id="authArea">
+        <!-- Filled by JS -->
+      </div>
     </div>
   </header>
 
@@ -33,7 +36,7 @@
       <h3>ইনভেস্টমেন্ট ক্যালকুলেটর</h3>
       <div class="card calc-grid">
         <div>
-          <label>প্রাথমিক বিনিয়োগ (৳)</label>
+          <label>প্রাথমিক বিনিয়���গ (৳)</label>
           <input id="principal" type="number" min="0" value="10000" />
         </div>
         <div>
@@ -115,7 +118,7 @@
     <section id="about" class="container section">
       <h3>বিস্তারিত</h3>
       <p>এই সাইটটি একটি স্ট্যাটিক ডেমো—ক্যালকুলেটর ও পোর্টফোলিও ব্যবস্থাপনা ক্লায়েন্ট-সাইডে কাজ করে (localStorage)। প্রকৃত বিনিয়োগ সিদ্ধান্তের আগে পেশাদার পরামর্শ নেবেন।</p>
-      <p>এই সংস্করণে চার্ট (Chart.js) যোগ করা হয়েছে এবং CSV Export/Import সুবিধা আছে।</p>
+      <p>এই সংস্করণে চার্ট (Chart.js), CSV Export/Import এবং সহজ লগইন/রেজিস্ট্রেশন (localStorage) যোগ করা হয়েছে।</p>
     </section>
   </main>
 
@@ -124,6 +127,31 @@
       <p>© 2026 মিনি ইনভেস্ট — ডেমো প্রজেক্ট</p>
     </div>
   </footer>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="auth-tabs">
+        <button id="showLogin" class="tab active">লগইন</button>
+        <button id="showRegister" class="tab">রেজিস্টার</button>
+      </div>
+      <div id="loginBox" class="auth-box">
+        <h3>লগইন</h3>
+        <input id="loginEmail" type="email" placeholder="ইমেইল" />
+        <input id="loginPassword" type="password" placeholder="পাসওয়ার্ড" />
+        <button id="loginBtn" class="btn">লগইন</button>
+      </div>
+      <div id="registerBox" class="auth-box hidden">
+        <h3>রেজিস্টার</h3>
+        <input id="regName" placeholder="নাম" />
+        <input id="regEmail" type="email" placeholder="ইমেইল" />
+        <input id="regPassword" type="password" placeholder="পাসওয়ার্ড" />
+        <input id="regPassword2" type="password" placeholder="পাসওয়ার্ড পুনরায়" />
+        <button id="registerBtn" class="btn">রেজিস্টার</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
