@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>মিনি ইনভেস্ট — Investment Website</title>
+  <meta name="description" content="সহজ ইনভেস্টমেন্ট ক্যালকুলেটর ও পোর্টফোলিও টুল (বাংলা)।" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -76,6 +78,12 @@
           <button type="submit" class="btn small">যোগ করো</button>
         </form>
 
+        <div class="portfolio-actions">
+          <button id="exportCsv" class="btn small outline">Export CSV</button>
+          <label class="btn small file-label">Import CSV <input id="importCsv" type="file" accept="text/csv" hidden></label>
+          <button id="clearPortfolio" class="btn small danger">Clear All</button>
+        </div>
+
         <table id="portfolioTable" class="portfolio-table">
           <thead>
             <tr>
@@ -96,13 +104,18 @@
             </tr>
           </tfoot>
         </table>
+
+        <div class="chart-card">
+          <h4>পোর্টফোলিও চার্ট (Future Value)</h4>
+          <canvas id="portfolioChart" height="120"></canvas>
+        </div>
       </div>
     </section>
 
     <section id="about" class="container section">
       <h3>বিস্তারিত</h3>
       <p>এই সাইটটি একটি স্ট্যাটিক ডেমো—ক্যালকুলেটর ও পোর্টফোলিও ব্যবস্থাপনা ক্লায়েন্ট-সাইডে কাজ করে (localStorage)। প্রকৃত বিনিয়োগ সিদ্ধান্তের আগে পেশাদার পরামর্শ নেবেন।</p>
-      <p>চাইলে আমি এই প্রজেক্টকে GitHub-এ আপলোড করে, বা সার্ভারে ডিপ্লয় করার নির্দেশনা দিতে পারি।</p>
+      <p>এই সংস্করণে চার্ট (Chart.js) যোগ করা হয়েছে এবং CSV Export/Import সুবিধা আছে।</p>
     </section>
   </main>
 
@@ -112,6 +125,8 @@
     </div>
   </footer>
 
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -4,6 +4,7 @@
   --muted:#666;
   --bg:#f7f9fc;
   --card:#fff;
+  --danger:#e85d5d;
   --max-width:1100px;
   font-family: "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
 }
@@ -24,6 +25,8 @@ html,body{height:100%;margin:0;background:var(--bg);color:#222}
 .hero h2{margin:0 0 .5rem}
 .btn{display:inline-block;background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:6px;text-decoration:none;border:none;cursor:pointer}
 .btn.small{padding:.35rem .6rem;font-size:.9rem}
+.btn.outline{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.danger{background:var(--danger)}
 
 /* সেকশন ও কার্ড */
 .section{padding:2rem 0}
@@ -37,10 +40,15 @@ html,body{height:100%;margin:0;background:var(--bg);color:#222}
 
 /* পোর্টফোলিও টেবিল */
 .form-inline{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem}
-.form-inline input{padding:.45rem;border:1px solid #e0eefc;border-radius:6px}
-.portfolio-table{width:100%;border-collapse:collapse}
+.form-inline input{padding:.45rem;border:1px solid:#e0eefc;border-radius:6px}
+.portfolio-table{width:100%;border-collapse:collapse;margin-top:.5rem}
 .portfolio-table th, .portfolio-table td{padding:.5rem;border-bottom:1px solid #f0f6fb;text-align:left}
 .portfolio-table tfoot td{font-weight:700}
+
+.portfolio-actions{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem}
+.file-label{display:inline-block;cursor:pointer}
+
+.chart-card{margin-top:1rem;padding:1rem;background:#fbfdff;border-radius:8px}
 
 /* ফুটার */
 .site-footer{padding:1rem 0;text-align:center;color:var(--muted);margin-top:2rem}
@@ -50,4 +58,5 @@ html,body{height:100%;margin:0;background:var(--bg);color:#222}
   .site-header .container{flex-direction:column;align-items:flex-start}
   .calc-grid{grid-template-columns:1fr}
   .form-inline{flex-direction:column}
+  .portfolio-actions{flex-direction:column;align-items:flex-start}
 }
